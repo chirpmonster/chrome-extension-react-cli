@@ -11,6 +11,7 @@ const config = (env, argv) => merge(common, {
         index: PATHS.src + '/iframe/index.js',
         contentScript: PATHS.src + '/contentScript.js',
         background: PATHS.src + '/background.js',
+        injectScript: PATHS.src + '/injectScript/index.js',
     },
     devtool: argv.mode === 'production' ? false : 'source-map'
 });

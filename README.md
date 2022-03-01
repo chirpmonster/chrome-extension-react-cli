@@ -1,11 +1,13 @@
 # chrome-extension-react-cli
 
+等待完善
+
 本地调试：
 
-1. npm run watch
+1. yarn start
 2. 将build文件夹拖入拓展程序即可，支持热更新
 
-打包发布：npm run build
+打包发布：yarn build
 
 项目架构
 ```
@@ -13,7 +15,7 @@ my-extension
 ├── README.md
 ├── node_modules
 ├── package.json
-├── package-lock.json
+├── yarn.lock
 ├── babel.config.json
 ├── .gitignore
 ├── config                    // Webpack配置
@@ -25,15 +27,20 @@ my-extension
 │   │   ├── icon_16.png
 │   │   ├── icon_32.png
 │   │   ├── icon_48.png
-│   │   ├── icon_128.png
+│   │   └── icon_128.png
 │   ├── iframe.html           // iframe基础页面，无需修改
 │   └── manifest.json         // chrome-extensions配置
 └── src
     ├── background.js         // backgound入口    
-    ├── iframe.js             // iframe嵌入页面样式及消息转发（因为iframe渲染需要时间）       
-    ├── contentScript.js      // contentScript内嵌iframe入口
+    ├── iframe.js             // iframe嵌入页面样式及消息转发（因为iframe渲染需要时间）
+    ├── contentScript.js      // contentScript入口，无需修改
     ├── background
-    └── iframe
+    ├── iframe
+    │   ├── components
+    │   └── index.js          // iframe入口
+    └── injectScript
+        ├── modules
+        └── index.js          // injectScript入口，自动执行
 ```
 
 
@@ -52,4 +59,4 @@ chrome.tabs.sendMessaage用于向页面发送消息
 chrome.runtime.addListener用于接收所有消息
 
 contentScript中操作DOM，但是无法调用任何js，包括window
-想要操作JS，在iframe中操作
+想要操作JS，在injectScript中操作
